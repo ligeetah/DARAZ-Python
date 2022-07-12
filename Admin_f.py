@@ -2,15 +2,9 @@ class Admin:
     username =""
     password=""
     history = []
-    #def Admin():
-    #    None
     def __init__(self, username, password):
         self.password=password
         self.username=username
-    # def _initialize_instance_fields(self):
-    #     self._username = None
-    #     self._password = None
-    #     self._history = []
     def get_history(self):
         return self.history
     def add_history(self, input):

@@ -5,8 +5,8 @@ class AdminUI:
     def take_admin_info():
         a = input("Enter Username :")
         b = input("Enter Password :")
-        obj = Admin(a, b);
-        return obj;
+        obj = Admin(a, b)
+        return obj
 
     @staticmethod
     def admin_menu():

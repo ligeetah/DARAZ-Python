@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from Admin_f import Admin
 
 class AdminDL :
@@ -17,7 +18,7 @@ class AdminDL :
         if admin.get_username() == AdminDL.admin.get_username() and AdminDL.admin.get_password() == admin.get_password():
             return AdminDL.admin
         else:
-            return None
+            return NULL
 
     @staticmethod
     def change_password(pass_, pass1, pass2):

@@ -35,6 +35,13 @@ class SellerDL:
         else:
             SellerDL.seller.remove(Seller)
             return True
+    @staticmethod
+    def get_product(product):
+        for i in range(len(SellerDL.seller)):
+            for m in range(len(SellerDL.seller[i].products)):
+                if product==SellerDL.seller[i].products[m].name :
+                    return SellerDL.seller[i].products[m]
+        return None
     # @staticmethod
     # def replace(pre, nw):
     #     i = 0

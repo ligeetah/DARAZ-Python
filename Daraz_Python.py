@@ -1,4 +1,11 @@
+from pickle import NONE
+from UserBL_f import UserBL
+from UserUI_f import UserUI
+
+from UserDL_f import UserDL
+from UserUI_f import UserUI
 from asyncio.windows_events import NULL
+import os
 from Admin_f import Admin
 from AdminDL_f import AdminDL
 from AdminUI_f import AdminUI
@@ -11,20 +18,25 @@ def main():
     option='0'
     admin= Admin("1","2")
     m=Seller("1","1","1","1")
+    UserDL.add_list(UserBL('1','1'))
     SellerDL.add_list(m)
     AdminDL.set_admin(admin)
     while option !='4':
+        # os.system('cls')
         mainUI.header()
         option=mainUI.main_menu()
         if (option=='1'):
+            # os.system('cls')
             mainUI.header()
             admin=AdminUI.take_admin_info()
-            AdminDL.chk_admin(admin)
-            if(admin!=None):
+            admin=AdminDL.chk_admin(admin)
+            if(admin!=NULL):
                 admin_option='9'
                 while admin_option!=6:
+                    # os.system('cls')
                     mainUI.header()
                     admin_option= AdminUI.admin_menu()
+                    # os.system('cls')
                     mainUI.header()
                     if admin_option=='1':
                         s=SellerUI.add_seller()
@@ -45,7 +57,7 @@ def main():
                         break
                     else:
                         print("PLease enter correct input.")
-
+                    
             else:
                 print("Please enter Correct information.")
         elif option=='2':
@@ -53,6 +65,7 @@ def main():
             objSeller=SellerDL.get_seller_data(name,pass1)
             if(objSeller!=NULL):
                 while True:
+                    # os.system('cls')
                     seller_option=SellerUI.seller_menu()
                     if seller_option=='1':
                         objSeller.add_product(SellerUI.take_input_product())
@@ -83,18 +96,39 @@ def main():
             else:
                 print("PLease Enter correct Cradentials.")
         elif option=='3':
-            
-
-
-
-
-
-
-
-
-
-
+            # os.system('cls')
+            enter_o=UserUI.enter_option()
+            if(enter_o=='1'):
+                UserDL.add_list(UserUI.get_info())
+            else:
+                user=UserDL.check_user(UserUI.get_info())
+                if(user!=None):
+                    customer_option='9'
+                    while customer_option != '5':
+                        mainUI.header()
+                        customer_option= UserUI.customer_menu()
+                        mainUI.header()
+                        if(customer_option=='1'):
+                            SellerUI.show_all_products()
+                            product=SellerDL.get_product(UserUI.buy_product())
+                            if(product!=None):
+                                user.add_list(product)
+                            else:
+                                UserUI.no_product()
+                        elif customer_option=='2':
+                            UserUI.view_cart(user.products)
+                        elif customer_option=='3':
+                            UserUI.view_cart(user.products)
+                            if UserUI.total_bill(user.get_total()):
+                                user.clear_products()
+                        elif customer_option=='4':
+                            pass1=UserUI.change_password(user.password)
+                            if pass1!=False:
+                                user.password=pass1
+                        elif customer_option=='5':
+                            break
+                        else:
+                            print("PLease enter correct input.")
 if __name__ == "__main__":
     main()
-
 

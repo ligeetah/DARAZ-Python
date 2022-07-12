@@ -1,3 +1,4 @@
+from math import radians
 from SellerBL_f import Seller
 from SellerDL_f import SellerDL
 from ProductBL_f import Product
@@ -70,5 +71,12 @@ class SellerUI:
         else:
             print("You have entered the wrong password.")
         return False
+    @staticmethod
+    def show_all_products():
+        for i in range(len(SellerDL.seller)):
+            print("Seller Name : ",SellerDL.seller[i].name," >")
+            print("Name\tPrice")
+            for m in range(len(SellerDL.seller[i].products)):
+                print(SellerDL.seller[i].products[m].name,'\t',SellerDL.seller[i].products[m].price)
 
 
